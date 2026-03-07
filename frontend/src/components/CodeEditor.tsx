@@ -59,7 +59,7 @@ export default function CodeEditor({
       onAnalyze(result.data?.analysis_id)
       toast.success('🎉 Code analysis started!')
     } catch (error) {
-      toast.error('❌ Failed to analyze code. Check that the backend is running.')
+      toast.error('❌ Failed to analyze code. Please try again.')
       console.error(error)
     } finally {
       setIsAnalyzing(false)
@@ -74,7 +74,7 @@ export default function CodeEditor({
         setHasCode(true)
         toast.success('📋 Code pasted from clipboard!')
       } else {
-        toast('📋 Clipboard is empty. Type or paste code manually.', { icon: 'ℹ️' })
+        toast('📋 Clipboard is empty. Please type or paste code into the editor.', { icon: 'ℹ️' })
         setHasCode(true)
       }
     } catch {
@@ -249,7 +249,7 @@ export default function CodeEditor({
       </div>
 
       {/* File Tabs */}
-      <div className="flex items-center bg-gray-850 border-b border-gray-700/50 px-2" style={{ backgroundColor: '#1a1f2e' }}>
+      <div className="flex items-center border-b border-gray-700/50 px-2" style={{ backgroundColor: '#1a1f2e' }}>
         {tabs.map((tab, index) => (
           <button
             key={index}
@@ -281,7 +281,7 @@ export default function CodeEditor({
             </div>
             <h3 className="text-xl font-bold text-white mb-2">No Code Submitted</h3>
             <p className="text-sm text-gray-400 mb-8 max-w-sm">
-              Paste your Python code here or upload a file to start the intelligent AI analysis.
+              Paste your code here or upload a file to start the intelligent AI analysis.
             </p>
             <div className="flex flex-col space-y-3 w-full max-w-sm">
               <button

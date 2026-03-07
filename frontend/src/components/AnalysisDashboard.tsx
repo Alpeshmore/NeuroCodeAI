@@ -54,7 +54,7 @@ export default function AnalysisDashboard({ analysisId }: AnalysisDashboardProps
                 <Zap className="w-3.5 h-3.5 text-yellow-400" />
                 <span className="text-sm font-semibold text-white">Optimize Complexity</span>
               </div>
-              <p className="text-xs text-gray-400 ml-5.5 pl-1">
+              <p className="text-xs text-gray-400 ml-6">
                 Let NeuroCode AI find O(n²) bottlenecks in your current script.
               </p>
             </div>
@@ -63,7 +63,7 @@ export default function AnalysisDashboard({ analysisId }: AnalysisDashboardProps
                 <Shield className="w-3.5 h-3.5 text-red-400" />
                 <span className="text-sm font-semibold text-white">Security Audit</span>
               </div>
-              <p className="text-xs text-gray-400 ml-5.5 pl-1">
+              <p className="text-xs text-gray-400 ml-6">
                 Check for SQL injection and insecure dependency usage.
               </p>
             </div>
