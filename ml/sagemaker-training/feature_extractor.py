@@ -45,7 +45,6 @@ PATTERNS = {
     'type_hint': re.compile(r':\s*[A-Z]\w+|:\s*(int|str|float|bool|list|dict|tuple|set)'),
     'docstring': re.compile(r'"""[\s\S]*?"""|\'\'\'[\s\S]*?\'\'\''),
     'magic_number': re.compile(r'(?<!["\'\w])\b(?!0\b|1\b|2\b)\d{2,}\b(?!["\'])'),
-    'recursion_hint': re.compile(r''),  # placeholder, detected separately
 }
 
 # Keywords to exclude from identifier analysis

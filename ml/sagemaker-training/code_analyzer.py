@@ -199,7 +199,7 @@ def _load_model(model_path: str) -> 'torch.nn.Module':
     if not TORCH_AVAILABLE:
         raise RuntimeError('PyTorch is required for model inference')
 
-    checkpoint = torch.load(model_path, map_location='cpu', weights_only=False)
+    checkpoint = torch.load(model_path, map_location='cpu', weights_only=True)
     arch = checkpoint.get('model_architecture', {})
     model = ConfusionDetectorModel(
         input_dim=arch.get('input_dim', 50),
@@ -295,7 +295,8 @@ def analyse_code(
     if model_path and os.path.isfile(model_path):
         try:
             model = _load_model(model_path)
-        except Exception:
+        except (FileNotFoundError, RuntimeError, KeyError) as exc:
+            print(f'Warning: could not load model from {model_path}: {exc}')
             model = None
 
     # Segment the code
