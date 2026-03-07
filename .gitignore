@@ -1,0 +1,21 @@
+# dependencies
+node_modules
+
+# nextjs build
+.next
+out
+
+# environment variables
+.env
+.env.local
+
+# logs
+logs
+*.log
+
+# build folders
+dist
+build
+
+# vscode
+.vscode

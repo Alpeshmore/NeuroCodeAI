@@ -1,0 +1,206 @@
+version: '3.8'
+
+services:
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - NEXT_PUBLIC_WS_URL=ws://localhost:4000
+    depends_on:
+      - api-gateway
+    networks:
+      - neurocode-network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./backend/api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_URL=postgresql://postgres:postgres@postgres:5432/neurocode
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - JWT_SECRET=your-secret-key-change-in-production
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    networks:
+      - neurocode-network
+
+  # Auth Service
+  auth-service:
+    build:
+      context: ./backend/auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "4001:4001"
+    environment:
+      - PORT=4001
+      - POSTGRES_URL=postgresql://postgres:postgres@postgres:5432/neurocode
+      - JWT_SECRET=your-secret-key-change-in-production
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - neurocode-network
+
+  # Code Analysis Service
+  code-analysis-service:
+    build:
+      context: ./backend/code-analysis-service
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - rabbitmq
+      - redis
+    networks:
+      - neurocode-network
+
+  # Model Inference Service
+#  model-inference-service:
+ #   build:
+  #    context: ./backend/model-inference-service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - MODEL_PATH=/models
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./ml-models:/models
+    depends_on:
+      - redis
+    networks:
+      - neurocode-network
+
+  # Confusion Detection Service
+  confusion-detection-service:
+    build:
+      context: ./backend/confusion-detection-service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - INFLUXDB_URL=http://influxdb:8086
+    depends_on:
+      - rabbitmq
+      - influxdb
+    networks:
+      - neurocode-network
+
+  # Explanation Service
+  explanation-service:
+    build:
+      context: ./backend/explanation-service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    environment:
+      - PORT=5003
+      - POSTGRES_URL=postgresql://postgres:postgres@postgres:5432/neurocode
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - neurocode-network
+
+  # Learning Memory Service
+  learning-memory-service:
+    build:
+      context: ./backend/learning-memory-service
+      dockerfile: Dockerfile
+    ports:
+      - "5004:5004"
+    environment:
+      - PORT=5004
+      - POSTGRES_URL=postgresql://postgres:postgres@postgres:5432/neurocode
+      - INFLUXDB_URL=http://influxdb:8086
+    depends_on:
+      - postgres
+      - influxdb
+    networks:
+      - neurocode-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=neurocode
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - neurocode-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - neurocode-network
+
+  # RabbitMQ Message Queue
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - neurocode-network
+
+  # InfluxDB Time-Series Database
+  influxdb:
+    image: influxdb:2.7-alpine
+    ports:
+      - "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=adminpassword
+      - DOCKER_INFLUXDB_INIT_ORG=neurocode
+      - DOCKER_INFLUXDB_INIT_BUCKET=metrics
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    networks:
+      - neurocode-network
+
+networks:
+  neurocode-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  rabbitmq-data:
+  influxdb-data:

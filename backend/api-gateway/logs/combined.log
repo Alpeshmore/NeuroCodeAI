@@ -1,0 +1,32 @@
+{"level":"info","message":"WebSocket initialized","timestamp":"2026-03-07 17:03:06"}
+{"level":"info","message":"API Gateway running on port 4000","timestamp":"2026-03-07 17:03:06"}
+{"level":"info","message":"Environment: development","timestamp":"2026-03-07 17:03:06"}
+{"level":"info","message":"WebSocket initialized","timestamp":"2026-03-07 17:14:12"}
+{"level":"info","message":"API Gateway running on port 4000","timestamp":"2026-03-07 17:14:12"}
+{"level":"info","message":"Environment: development","timestamp":"2026-03-07 17:14:12"}
+{"level":"info","message":"WebSocket initialized","timestamp":"2026-03-07 20:05:51"}
+{"level":"info","message":"API Gateway running on port 4000","timestamp":"2026-03-07 20:05:51"}
+{"level":"info","message":"Environment: development","timestamp":"2026-03-07 20:05:51"}
+{"level":"info","message":"WebSocket initialized","timestamp":"2026-03-07 20:11:14"}
+{"level":"info","message":"API Gateway running on port 4000","timestamp":"2026-03-07 20:11:14"}
+{"level":"info","message":"Environment: development","timestamp":"2026-03-07 20:11:14"}
+{"level":"info","message":"WebSocket initialized","timestamp":"2026-03-07 20:26:35"}
+{"level":"warn","message":"Port 4000 is already in use, trying next port...","timestamp":"2026-03-07 20:26:35"}
+{"level":"info","message":"🚀 API Gateway running on port 4001","timestamp":"2026-03-07 20:26:35"}
+{"level":"info","message":"📍 Environment: development","timestamp":"2026-03-07 20:26:35"}
+{"level":"info","message":"🌐 CORS Origin: http://localhost:3000","timestamp":"2026-03-07 20:26:35"}
+{"level":"info","message":"✅ Server started successfully at http://localhost:4001","timestamp":"2026-03-07 20:26:35"}
+{"level":"warn","message":"⚠️  Note: Using port 4001 instead of 4000 (port was in use)","timestamp":"2026-03-07 20:26:35"}
+{"codeLength":294,"language":"python","level":"info","message":"Code analysis request","timestamp":"2026-03-07 20:34:43"}
+{"id":"ana_1772895884364","level":"info","message":"Get analysis","timestamp":"2026-03-07 20:34:44"}
+{"id":"ana_1772895884364","level":"info","message":"Get analysis","timestamp":"2026-03-07 20:34:44"}
+{"codeLength":294,"language":"python","level":"info","message":"Code analysis request","timestamp":"2026-03-07 20:35:14"}
+{"id":"ana_1772895915706","level":"info","message":"Get analysis","timestamp":"2026-03-07 20:35:15"}
+{"id":"ana_1772895915706","level":"info","message":"Get analysis","timestamp":"2026-03-07 20:35:15"}
+{"level":"info","message":"WebSocket initialized","timestamp":"2026-03-07 20:36:27"}
+{"level":"warn","message":"Port 4000 is already in use, trying next port...","timestamp":"2026-03-07 20:36:27"}
+{"level":"info","message":"🚀 API Gateway running on port 4001","timestamp":"2026-03-07 20:36:27"}
+{"level":"info","message":"📍 Environment: development","timestamp":"2026-03-07 20:36:27"}
+{"level":"info","message":"🌐 CORS Origin: http://localhost:3000","timestamp":"2026-03-07 20:36:27"}
+{"level":"info","message":"✅ Server started successfully at http://localhost:4001","timestamp":"2026-03-07 20:36:27"}
+{"level":"warn","message":"⚠️  Note: Using port 4001 instead of 4000 (port was in use)","timestamp":"2026-03-07 20:36:27"}

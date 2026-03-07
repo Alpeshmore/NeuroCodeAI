@@ -1,0 +1,54 @@
+{
+  "name": "neurocode-ai",
+  "version": "1.0.0",
+  "description": "NeuroCode AI - Confusion-Aware Recursive Code Intelligence System",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend/*",
+    "shared/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend/api-gateway && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:aws": "node test-aws-connection.js",
+    "lint": "npm run lint --workspaces --if-present",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "k8s:deploy": "kubectl apply -f infrastructure/kubernetes/",
+    "setup": "npm install && npm run setup --workspaces --if-present",
+    "setup:aws": "bash setup-aws-credentials.sh"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.490.0",
+    "@aws-sdk/client-sqs": "^3.490.0",
+    "@aws-sdk/client-secrets-manager": "^3.490.0",
+    "@aws-sdk/client-sts": "^3.490.0",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neurocode-ai/neurocode-ai"
+  },
+  "keywords": [
+    "ai",
+    "code-analysis",
+    "learning",
+    "education",
+    "developer-tools"
+  ],
+  "author": "NeuroCode AI Team",
+  "license": "MIT"
+}
