@@ -6,7 +6,7 @@ import MonacoEditor from '../components/MonacoEditor'
 import ExplanationPanel from '../components/ExplanationPanel'
 import InsightsPanel from '../components/InsightsPanel'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const API_BASE = import.meta.env.VITE_API_URL || '/api'
 
 export default function Dashboard() {
   const [code, setCode] = useState('')
