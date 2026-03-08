@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Editor from '@monaco-editor/react'
+import { detectLanguage } from '../utils/detectLanguage'
 
 const SAMPLE_CODE = {
   python: '',
@@ -26,6 +27,15 @@ export default function MonacoEditor({
 }) {
   const editorRef = useRef(null)
   const [decorations, setDecorations] = useState([])
+  const [detectedLang, setDetectedLang] = useState(null)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const detected = detectLanguage(code)
+      setDetectedLang(detected)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [code])
 
   const handleEditorMount = (editor, monaco) => {
     editorRef.current = editor
@@ -117,6 +127,20 @@ export default function MonacoEditor({
               </button>
             ))}
           </div>
+
+          {/* Language detection badge */}
+          {detectedLang && detectedLang !== language && code.trim().length > 0 && (
+            <div className="flex items-center gap-2 ml-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+              <span className="text-amber-400 text-xs">⚠ Detected:</span>
+              <span className="text-amber-300 text-xs font-semibold capitalize">{detectedLang}</span>
+              <button
+                onClick={() => onLanguageChange(detectedLang)}
+                className="text-[10px] text-amber-400 hover:text-amber-200 underline transition-colors"
+              >
+                Switch
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-2">
